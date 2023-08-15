@@ -13,13 +13,13 @@ function Header() {
             </div>
           </div>
         </Link>
-        <div className="Search_root__eiX89">
+        {/* <div className="Search_root__eiX89">
           <svg
             className="Search_icon__XMmYc"
-            enableBackground="new 0 0 32 32"
+            enableBackground="new 0 0 100 100"
             id="EditableLine"
             version="1.1"
-            viewBox="0 0 32 32"
+            viewBox="0 0 100 100"
             xmlns="http://www.w3.org/2000/svg"
           >
             <circle
@@ -53,7 +53,7 @@ function Header() {
             placeholder="Поиск пиццы..."
             value=""
           />
-        </div>
+        </div> */}
         <div className="header__cart">
           <Link className="button button--cart" to="/cart">
             <span>560 ₽</span>
