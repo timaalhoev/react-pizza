@@ -6,7 +6,7 @@ import PizzaBlock from "../components/PizzaBlock/index";
 // import Skeleton from "./components/PizzaBlock/Skeleton";
 // import pizzas from "./assets/pizzas.json";
 
-const Home = () => {
+const Home = ({ searchValue }) => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [categoryId, setCategoryId] = React.useState(0);
@@ -41,9 +41,13 @@ const Home = () => {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
-        {items.map((obj) => (
-          <PizzaBlock key={obj.id} {...obj} />
-        ))}
+        {items
+          .filter((obj) => {
+            return;
+          })
+          .map((obj) => (
+            <PizzaBlock key={obj.id} {...obj} />
+          ))}
       </div>
     </div>
   );
