@@ -1,4 +1,5 @@
 import React from "react";
+import ReactPaginate from "react-paginate";
 
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
@@ -20,8 +21,10 @@ const Home = ({ searchValue }) => {
     const sortBy = sortType.sortProperty.replace("-", "");
     const order = sortType.sortProperty.includes("-") ? "asc" : "desc";
     const category = categoryId > 0 ? `category=${categoryId}` : "";
+    const search = searchValue ? `&search=${searchValue}` : "";
+
     fetch(
-      `https://64cb05e0700d50e3c705626e.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}`
+      `https://64cb05e0700d50e3c705626e.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}&${search}`
     )
       .then((res) => res.json())
       .then((json) => {
@@ -29,7 +32,7 @@ const Home = ({ searchValue }) => {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sortType]);
+  }, [categoryId, sortType, searchValue]);
   return (
     <div className="container">
       <div className="content__top">
@@ -43,12 +46,24 @@ const Home = ({ searchValue }) => {
       <div className="content__items">
         {items
           .filter((obj) => {
-            return;
+            if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
+              return true;
+            }
+            return false;
           })
           .map((obj) => (
             <PizzaBlock key={obj.id} {...obj} />
           ))}
       </div>
+      <ReactPaginate
+        breakLabel="...."
+        nextLabel="next >"
+        onPageChange={(event) => console.log(event)}
+        pageRangeDisplayed={8}
+        pageCount={3}
+        previousLabel="< previous"
+        renderOnZeroPageCount={null}
+      />
     </div>
   );
 };
